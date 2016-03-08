@@ -1,0 +1,78 @@
+- Many scientists, engineers, and statisticians make use of serious numerical computations. For many
+people, numerics are sometimes essential.
+
+- From a mathematical point of view, some computations are imprecise or wrong, because the hardware
+representation of a number is actually just an approximation.
+
+- Whenever we make significant use of floating-point numbers, rounding errors will occur. The only 
+question is whether the error significantly affects the result.
+
+- We prefer errors to manifest themselves early and spectacularly so that we can fix them asap.
+
+- When we assign an integer fo a floating-point number, if an integer is larger than the
+floating-point type can represent, we lose precision.
+  On the other hand, when we assign a FP number to an integer, we get truncation (i.e. the fractional
+part is simply thrown away).
+
+- When we can, we prefer to limit ourselves to a few data types. That can help minimize confusion.
+(i.e. help avoid narrowing problems). 
+  In fact, we prefer to limit our use to int, double, and complex for computation, char for characters,
+and bool for logical entities.
+
+#######################################################################################################
+- The C++ built-in array can be used as a multidimensional array.
+  This approach inherits the virtues and the disadvantages of the one-dimensional array:
+      #Advantages:
+          - Direct mapping to hardware.
+          - Efficient for low-level operations.
+          - Direct language support.
+      #Problems:
+          - C-style multidimensional arrays are arrays of arrays.
+          - Fixed (i.e. compile-time) sizes. If we want to determine
+          a size at run time, we'd have to use the free store.
+          - Can't be passed cleanly. Built-in arrays turn into pointers
+          to their first elements at the slightest provocation.
+          - No range checking. A built-in array doesn't know its own size.
+          - No array operations, not even assignment.
+
+- Built-in arrays are widely used for numeric computation, buy they're also a MAJOR source of bugs and
+complexity.
+
+- The most fundamental problem is that we can't pass multidimensional arrays cleanly, so we have to
+fall back on pointers and explicit calculation of element locations.
+
+#######################################################################################################
+- What are the basic facilities we want from an array/matrix aimed at numerical computation?
+    # The code should look very much to what we find in a math/engineering textbook text about arrays,
+    vectors, matrices, tensors etc.
+    # Compile-time and run-time checked:
+        - Arrays of any dimension.
+        - Arrays with any number of elements in a dimension.
+    # Arrays are proper variables/objects:
+        - We can pass them around.
+    # Usual array operations:
+        - Subscripting: ()
+        - Slicing: []
+        - Assignment: =
+        - Scaling operations: +=, -=, *=, %= etc.
+        - Fused vector operations
+        - Dot product (i.e. scalar product).
+    # Basically, transforms conventional array/vector notation into the code we'd laboriously have had
+    to write ourselves (and runs at least as efficiently as that).
+
+#######################################################################################################
+- From a mathematical point of view, it is not an invidivual number that is random. What we often
+refer to as random numbers, is a sequence of numbers that conform to some distribution and where you
+cannot easily predict the next number in the sequence given the previous ones.
+
+- Random numbers are most useful in testing, in games, and in simulations. As a practical tool and a
+mathematical problem, they reach a high degree of sophistication to match their real-word importance.
+
+- The standard library provides a set of facilities for generating random numbers to match a variety of
+mathematical distributions. Those facilities are based on two fundamental notions:
+    - Engines(random number engines): An engine is a functor that generates a uniformly distributed
+    sequence of integer values.
+    - Distributions: A distribution is a functor that generates a sequence of values according to a
+    mathematical formula given a sequence of values from an engine as inputs.
+
+- The normal distribution is very common and also known as the Gaussian distribution(or the bell curve)

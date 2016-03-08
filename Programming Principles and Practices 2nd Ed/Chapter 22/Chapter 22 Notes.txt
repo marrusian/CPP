@@ -1,0 +1,356 @@
+- There can be no professionalism without some understanding of history, because the history of
+any field of work is littered with plausible ideas that didn't work.
+
+- The "real meat" of history is ideas and ideals that have proved their worth in practical use.
+
+- NEVER forget this: the ultimate aim of programming is always to produce useful systems.
+
+#################################################################################################
+Aims and philosophies:
+
+- A programming language is:
+	- A tool for instructing machines.
+	- A tool for experimentation.
+	- A notation for algorithms.
+	- A means of communication among programmers.
+	- A means of controlling computerized devices.
+	- A way of expressing relationships among concepts.
+	- A means of expressing high-level designs.
+	- All of the above and more!
+
+- Desirable properties of a programming language:
+	- Portability.
+	- Type safety.
+	- Precisely defined.
+	- High performance.
+	- Ability to concisely express ideas.
+	- Anything that eases debugging/testing.
+	- Access to all system resources.
+	- Stability over decades.
+	- Prompt improvements in response to changes in application areas.
+	- Support for popular programming styles (e.g., OOP, GP)
+	- Whatever helps analysis of programs.
+	- Lots of facilities.
+	- Supported by a large community.
+	- Comprehensive facilities for experts.
+	- Lots of software development tools and components available (e.g., IDEs, libraries)
+	- Supported by major platform vendors.
+   Unfortunately, we can't have them all at the same time, because several properties are mutually
+exclusive.
+
+#################################################################################################
+Programming ideals:
+
+- Ideals are what guide the technical choices and trade-offs that every program designer must make.
+Ideals are meant to be used. They are tools for thinking and our programs are meant to approximate our
+ideals.
+
+- We need our code to have a good structure in order to make changes without excessive effort (e.g.
+find and fix a bug, add new features, port it to new architectures, make it more performant etc.)
+
+- What we tipically want:
+	a. Correctness: it can be difficult to define what we mean by "correct", but doing so is an
+	important part of the job.
+	b. Maintainability: every successful program will be changed over time; it will be ported to
+	new platforms, it will be extended with new facilities and new bugs will be found that must be
+	fixed.
+	c. Performance: performance has to be ADEQUATE for the program's purpose. Acceptable
+	performance is often achieved through adherence to the ideals and approaches discussed.
+	Poor performance can as easily arise from an obsession with low-level details as it can from
+	distain for such details.
+	d. On-time delivery: we need to deliver quality software in a reasonable amount of time.
+	Again, emphasis on good structure (e.g. RAII, invariants, and interface design), design for
+	testability, and use of appropriate libraries is a good way to meet deadlines.
+
+- A program has to be understandable. Anything that helps us understand a program and helps us reason
+about it is good. Fundamentally, regularity is better than irregularity as long as it is not achieved
+through oversimplification.
+
+- The are two approaches to writing correct software:
+	- Bottom-up: compose the system using only components proved to be correct.
+	- Top-down: compose the system using components assumed to contain errors and catch them all.
+
+- For a large real-world system,neither approach will deliver the needed correctness and adaptability:
+	- We can't build and "prove" enough basic components to eliminate all sources of errors.
+	- We can't completely compensate for the flaws of buggy basic components (e.g. libraries,
+	subsystems, class hierarchies etc.) when combining them in the final system.
+
+- A combination of the two approaches is the key: we can produce components that are sufficiently good
+so that the problems that remain can be compensated by error handling and systematic testing. Also,
+if we keep building better components, a larger part of the system can be constructed from them,
+reducing the amount of "messy ad-hoc code" needed.
+
+- When we express something, the ideal is to express it directly in code. This fundamental ideal has a
+few specific variants:
+	- Represent ideas directly in code: represent an argument as a specific type(e.g., Month),
+	 rather than as a more general one.
+
+	- Represent independent ideas independently in code: for example, the standard sort() can sort
+	any standard container of any element type. The concepts of sorting, sorting criteria,
+	container and element type are independent.
+
+	- Represent relationships among ideas directly in code: the most common methods are
+	inheritance (e.g., a Circle is-a kind of Shape) and parameterization(e.g., a vector<T> 
+	represents what's common for all vectors independently of T).
+
+	- Express simple ideas simply: the ideals listed above can lead to overly general code. To
+	avoid users having to face every possible complication, we try to provide simple versions that
+	deal with the most common or most important cases.
+
+- Always prefer to work at the highest feasible level of abstraction. Our ideal is to express our
+solutions in as general a way as possible, concerning both their representation and function.
+
+- The reason for preferring higher levels of abstraction is that such formulations are closer to the
+way we think about our problems and solutions.
+
+- The reason for dropping to a lower level of abstraction is tipically "efficiency" and it should be
+done ONLY when really needed (e.g., hard real-time computing).
+
+- Modularity is an ideal. We want to compose our systems out of "components" that we can build,
+understand, and test in isolation. Ideally, we also want to design and implement such components
+so they can be "reused" (however, not every component can be used in more than one program).
+
+- Modularity in code should reflect important logical distinctions in the application. 
+
+- Consistency and minimalism are primarily ideals for expressing ideas and help maintenance:
+	- Don't add a feature if you are in doubt about its utility.
+	- Do give similar facilities similar interfaces (and names), but only if the similarity is
+	fundamental.
+	- Consequently, do give different facilities different names (and possibly different
+	interface styles), but only if the differences are fundamental.
+
+- When such consistency is impossible, it can be an idea to supply an interface that matches the style
+of the rest of the program (the alternative is to let the foreign style infect every part that needs
+to access the offending code).
+
+- Ways of preserving minimalism and consistency:
+	- Carefully document every interface with pre/post conditions and invariants so 
+	inconsistencies and duplication are more likely to be noticed.
+	- Pay careful attention to resource management and error reporting.
+
+#################################################################################################
+Styles/paradigms:
+
+- When we design and implement a program, we aim for consistent style.
+  C++ supports four major styles:
+	- Procedural programming: the idea of composing a program out of functions operating on args.
+	C++ supports this style of programming through the notion of functions. Explicit abstraction
+	mechanisms (such as private data members or member functions) are not used.
+	This style of programming is an integral part of every other style.
+
+	- Data abstraction: the idea of first providing a set of types suitable for an application
+	area and then writing the program using those (e.g., Matrices, strings, vectors).
+	Explicit data hiding (i.e. the use of private data members) is heavily used.
+	This is called "abstraction" because a type is used through an interface, rather than by
+	directly accessing its implementation.
+
+	- OOP: the idea of organizing types into hierarchies to express their relationships directly
+	in code. This is valuable when the types really have fundamental hierarchical relationships.
+	
+	- Generic programming: the idea of taking concrete algorithms (and classes) and "lifting" them
+	to a higher level of abstraction by adding parameters to express what can be varied without
+	changing the general structure.
+
+#################################################################################################
+Roots of modern languages:
+
+- Important early languages: Lips, Fortran, COBOL, Algol60, Simula, Pascal, C. They were widely used
+and became ancestors to important modern languages.
+
+- Fortran("Formula Translation") - 1956
+- Considered the first high-level programming language.
+- Targeted application area: scientific and engineering calculations.
+- To this day, Fortran leads in the optimization of numerical computations.
+- Fundamental idea: generate efficient machine code from a notation designed for people rather than
+machines (i.e mathematical notation rather than machine instructions). The notation was largely
+machine independent so Fortran code was portable.
+- Developed/discovered: lexical analysis, syntax analysis, semantic analysis and optimization, 
+		notation for specifying grammars: the Backus-Naur Form(BNF).
+- Created by: a team at IBM lead by John Backus.
+
+- COBOL("The Common Business-Oriented Language) - 1959/1960
+- Known as the Fortran of business programmers.
+- Targeted application area: business processing.
+- Focused on: copying, storing and retrieving (record keeping), printing (reports).
+- Created by: a committee (CODASYL) at the initiative of the U.S Department of Defense. The design
+	built directly on the FLOW-MATIC language invented by Grace Hopper.
+	
+	Grace Hopper: - Ph.D. in mathematics from Yale.
+		      - Worked in the U.S. Navy.
+		      - Contributed to te use of a close-to-English syntax.
+		      - Credited with being the first person to call an error in a computer a "bug".
+
+- Lisp("List Processing") - 1958
+- Often interpreted language.
+- Targeted application area: AI and symbolic computation.
+- Focused on: linked-list and symbolic processing.
+- Current most popular dialects are Common Lisp and Scheme.
+- Created by: John McCarthy at MIT.
+	- John McCarthy: - Ph.D. in mathematics from Princeton.
+			 - Helped found the Stanford AI Lab.
+			 - Credited for inventing the term "artificial intelligence".
+
+- Algol60("Algorithmic Language") - 1960
+- Most closely related to Fortran.
+- The variety of programming languages in the late 1950 lead, under the auspices of IFIP, to the
+creation of a new language that revolutionized the way we think about languages and their definition.
+- Targeted application area: general-purpose programming.
+- Developed/discovered: lexical scope, use of grammar to define the language, clear separation of
+		syntactic and semantic rules, clear separation of language definition and
+		implementation, systematic use of static types, direct support for structured progrmm.
+- Never reached major non-academic use, although it set new standards for many areas.
+- Implemented by: a team of programmers led by Peter Naur and Edsger Dijkstra.
+	- Peter Naur: - Studied astronomy at University of Copenhagen.
+		      - Co-inventor of the BNF (the Backus-Naur Form) used to describe grammars.
+		      - Proponent of formal reasoning about programs.
+	- Edsger Dijkstra: - Studied physics in Leyden.
+			   - Pioneer of the use of mathematical logic in programming and algorithms.
+			   - One of the designers and implementers of T.H.E. operating system.
+			   - Famous paper: "Go-To Statement Considered Harmful", which demonstrated
+			the problems with unstructured control flows.
+
+- The Algol family tree: Algol58 => Algol60 => Algol68
+					    => Simula67
+					    => Pascal
+
+- Pascal - 1970
+- A successor to Algol designed and implemented in response to the very long formative period of 
+the Algol68 language. In contrast to Algol68, it was a simplification of Algol60.
+- Simple and inflexible.
+- Intended as a portable, easy-to-learn teaching language.
+- Saved from extinction in 1980 through the work of Anders Hejlsberg, one of the three founders of
+Borland. Designed and implemented Turbo Pascal, later designed Delphi for Borland and C# for Microsoft
+- Created by: Niklaus Wirth, a member of the Algol committee.
+	- Niklaus Wirth: - Ph.D. in EE and CS from Berkeley.
+			 - Influential professional language designer. He designed and implemented,
+			over a period of 25 years: Algol W, PL/360, Euler, Pascal, Modula, Modula-2,
+			Oberon, Oberon-2, describing this as his unending quest for simplicity.
+			 - Only person ever to present two languages at HOPL.
+
+- Ada - 1980
+- Designed to be a language for all the programming needs of the U.S. DoD
+- Targeted application area: embedded systems programming.
+- Focused on: Data abstraction, Strong static type checking, Direct language support concurrency.
+- Mandated for military applications by the DoD for many years.
+- Named after Lady Augusta Ada Lovelace (she worked with Charles Babbage, the Lucasian Professor of
+Mathematics in Cambridge, on a mechanical computer in the 1840s).
+- Created by: a team, lead by Jean Ichbiah, which won the design competition elaborated by the DoD.
+
+- Simula - mid-1960s
+- A member of the Algol family of languages (an almost completely superset of Algol60).
+- Focused on: object-oriented programming.
+- First language to provide inheritance and virtual functions. The words "class" for UDTs and
+"virtual" for base class overridable functions come from Simula.
+- Contributed to:
+	- Represent ideas as classes and class objects.
+	- Represent hierarchical relations as class hierarchies (inheritance).
+- Created by: Kristen Nygaard and Ole-Johan Dahl.
+
+---------------------------------------------------------------------------------------------------
+
+Review answers:
+1. Programming is the development of (quality) software.
+
+2. A programming language is a tool for developing software and is tipically the result of the ideals,
+work, personal tastes and external constraints of one or more individuals.
+
+3. Some uses of a programming language are:
+	- A tool for instructing machines.
+	- A tool for experimentation.
+	- A means of communication among programmers.
+	- A means of controlling computerized devices.
+	- A means of expressing high-level designs.
+	- A way of expressing relationships among concepts.
+
+4. Fundamental properties of a programming language:
+	- Portability.
+	- Precisely defined.
+	- Type safety.
+	- High performance.
+	- Small and easy to learn.
+	- Access to all system resources.
+	- Ability to concisely express ideas.
+	- Anything that helps debugging/testing.
+	- Whatever helps analysis of programs.
+	- Stability.
+	- Support for popular programming styles.
+
+5. Abstraction is the art of wrapping lower-level details into a more accessible and coherent 
+interface. In general, the ideal is to balance as much as possible the trade-off between usability
+and performance.
+
+6. A set of four high-level ideals for code is: correctness, maintainability, performance and on-time
+delivery.
+
+7. Reuse is building a system out of previously tested components that have been used elsewhere.
+
+8. Procedural programming is the idea of building a program out of functions operating on various 
+arguments. This style is an integral part of every other.
+
+9. Data abstraction is the idea of first defining a set of types suitable for an application area and
+then writing the program using those. Explicit data hiding is heavily used.
+
+10. OOP is the idea of organizing types into hierarchies to express their relationship directly in
+code. This style is invaluable when our types have fundamental relationship hierarchies.
+
+11. Generic Programming is the idea of taking concrete algorithms and classes and lifting them to a
+higher level of abstraction by providing parameters to express what can be varied without changing
+the general structure. 
+
+12. Multi-paradigm programming is the mixing of various programming styles.
+
+13. The first program to ever run on a stored-program computer was a "table of squares" created by
+David Wheeler.
+
+14. David Wheeler has made himself noteworthy by:
+	- Writing a wonderful paper on how libraries should be designed that became a standard.
+	- Co-authoring the first programming book ever written.
+	- Contributing to an encryption algorithm (TEA) and a compression algorithm (bzip).
+
+15. The primary contribution of John Backus's Fortran was the introduction of a largely independent 
+mathematical notation in computer programming designed for high-performance scientific computations.
+
+16. The first language designed by Grace Hopper was FLOW-MATIC.
+
+17. John McCarthy primarily worked in the field of artificial intelligence. Actually, he was credited
+for inventing the term and contributed immensely to the evolution of this field.
+
+19. Edsger Dijkstra has made himself noteworthy by:
+	- Pioneering the use of mathematical logic in programming and algorithms.
+	- Being one of the designers and implementers of THE operating system.
+	- Being the first person ever to demonstrate about the problems of unstructured control flows.
+
+20. Niklaus Wirth designed and implemented: Algol W, Euler, Pascal, Oberon, Oberon-2, Modula, Modula-2
+and Lola. He is the only person to ever present two languages at the HOPL.
+
+21. Anders Hejlsberg was one of the three founders of Borland. He designed the Turbo Pascal and Delphi
+programming languages for Borland and later C# for Microsoft.
+
+22. Jean Ichbiah was the lead of the design team in charge with developing the Ada prog. language.
+
+23. Simula pioneered the OOP style. It was the first language to introduce the keyword "class" for
+UDTs and "virtual" for overridable base class member functions.
+
+.
+.
+.
+33. Scheme is a dialect of Lisp.
+
+34. C++'s most prominent ancestors are Simula67 and C.
+
+35. The "C" in C++ stands for Christopher after Christopher Strachey, the main designer of CPL (the
+ancestor of C).
+
+36. Fortran is an acronym that stands for "Formula Translation".
+
+37. COBOL is an acronym that stands for "The Common Business-Oriented Language"
+
+38. Lisp is an acronym that stnads for "List Processing".
+
+39. Pascal was named in honor of Blaise Pascal.
+
+40. Ada stands for the name of Lady Augusta Ada Lovelace, the daughter of Lord Byron who held the
+title of Baron Lovelace.
+
+41. There's no single all-purpose best programming language. Every field of work has its own 
+representative programming language. 

@@ -1,0 +1,9 @@
+- Terms that are used to change the behavior of a stream are
+called "manipulators".
+
+- An istream that reads from a string is called an istringstream
+and an ostream that stores characters written to it in a 
+string is called an ostringstream.
+
+- The stringstreams are generally used when we want to
+separate actual I/O from processing.

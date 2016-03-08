@@ -1,0 +1,193 @@
+- We manipulate text essentially all the time: books are full of text, much of what we see on computer
+screens is text, source code is text, communication channels (of all sorts) overflow with words etc.
+
+- The STL's string is just a template, called basic_string, that supports a variety of character sets.
+(in particular, string means basic_string<char>)
+
+- Pay careful attention when using the Unicode character set, because your code has to follow not just
+the language rules but also some system conventions.
+
+####################################################################################################
+- Associative arrays are key to a lot of text processing. The reason is simply that when we process
+text, we collect information, and that information is often associated with text strings.
+
+- The standard library's multimap makes it easy to access elements with the same key.
+
+- Simple and fundamental rule of thumb:
+   1. We build a general structure that we can use for many things.
+   2. We use that for a particular application.
+  That way, we build up a collection of more or less reusable components.
+
+- The way of building applications in stages (or layers) can dramatically simplify the design,
+implementation, documentation and maintenance of programs.
+  The value of keeping separate things separate, modularization, and gradually building an application
+increases with size.
+
+####################################################################################################
+- The regexps in C++ are part of the C++ standard library and are compatible with the regexps in PERL.
+
+- The "special character" problem got so annoying that C++ and other languages had to introduce the
+notion of raw string literals to be able to cope with realistic regex patterns. This way, in a RSL,
+a backslash is simply a backslash and a double quote is simply a double quote.
+
+- A regex pattern is a kind of string, however, it is not just a string, but a sophisticated mechanism
+for pattern matching that is created when we instantiate a regex.
+
+- An "smatch" is a vector of sub-matches of type string (the 's' stand for "sub"), with the size N+1,
+where N is the maximum number of sub-patterns in a regex. The first element is the complete match.
+
+- A sub-pattern is "anything in parantheses in the pattern".
+
+- Regular expressions ("regexps" or "regexs") is basically a little language for expressing patterns
+of characters. It's a powerful(expressive) and terse language.
+  There are many subtle features and several dialects. The largest and most useful subset appears
+to be the PERL dialect.
+
+- The regex library also supports the ECMAScript, POSIX, awk, grep and egrep notations.
+
+- Warning: "using the most features" is not an aim of good programming. We should take a pity on the
+maintenance programmer and write code that is not unnecessarily clever and avoid obscure features
+whenever we can.
+
+- By default, a character in a pattern matches itself in a string (i.e. "abc" will match abc).
+
+- Regexps' "special characters" are:
+	'.'  - any single character ("wildcard")
+        '[]' - begin/end character class
+        '{}' - being/end count
+        '()' - begin/end grouping
+        '\'  - next character has a special meaning
+        '*'  - zero or more
+        '+'  - one or more
+        '?'  - optional (i.e. zero or one)
+        '|'  - alternative (i.e or)
+        '^'  - start of line; negation
+        '$'  - end of line
+
+- To use the special characters in a pattern, they have to be preceded by a backslash (just like an
+escape character in C++). For example, '+' is a regex operator, but '\+' is the plus sign.
+- Note that '{...}', '*', '+', '?' are suffix operators.
+
+- Regexps' special characters for "character classes" are:
+        '\d' - a decimal digit                                     (same as [[:digit:]])
+        '\l' - a lowercase character                               (same as [[:lower:]])
+        '\s' - whitespace                                          (same as [[:space:]])
+        '\u' - an uppercase character                              (same as [[:upper:]])
+        '\w' - a letter (a-z or A-Z), digit (0-9) or underscore(_) (same as [[:alnum:]])
+        '\D', '\L', '\S', '\U', '\W' - negates the meaning of the aforementioned character classes.
+
+- Repeating patterns are specified by the suffix operators:
+        '{n}' - exactly n times
+        '{n,}' - n or more times
+        '{n,m} - at least n and at most m times
+        '*' - zero or more, that is {0,}
+        '+' - one or more, that is {1,}
+        '?' - optional (zero or one), that is {0,1}
+
+- We should use character ranges carefully (e.g. [1-3] or [w-z]). Not every language has the same
+letters and not every letter encoding has the same ordering.
+
+- When the first character of a character class specification is '^', that '^' means negation (e.g.
+[^\d] means not a digit, which is same as '\D').
+
+- Regexps' standard character classes notation (and semantics) are the same as those defined in cctype:
+'alnum', 'alpha', 'blank', 'cntrl', 'digit', 'graph', 'lower', 'print', 'punct', 'space', 'upper'.
+
+- When we assign a pattern to a regex, the pattern is checked, and if the regex matcher can't use it
+for matching because it's illegal or too complicated, a "bad_expression" exception is thrown.
+
+- There are two basic uses of regexps:
+        - Searching for a string that matches a regex in an (arbitrarily long) stream of data -
+        regex_search() looks for its pattern as a substring in the stream.
+
+        - Matching a regex against a string (of known size) -
+        regex_match() looks for a complete match of its pattern and the string.
+
+- Regexps are supported by an elegant theory based on formal languages and by an efficient
+implementation technique based on finite-state machines.
+  The full generality of regexps, their theory, their implementation, and the use of state machines in
+general are rather standard topics in CS curricula.
+
+-------------------------------------------------------------------------------------------------
+
+Review answers:
+
+1. We find text almost everywhere: books are filled with texts, most of what we see on computer screens
+is text, communication channels of all sorts overflow with text etc.
+
+2. The standard library facilities most frequently useful for text analysis are associative arrays,
+because when we gather data, that data is often associated with something (like text strings), and
+regexps, because they ease pattern matching.
+
+3. The string's insert() member function adds a character before its position.
+
+4. Unicode is a character set that supports 16- and 32-bits character encoding. It was created in
+response to the need of having an international character set and representing various types of
+characters and symbols from different languages.
+
+5. We convert to and from a string representation by using stringstreams (i.e. i/o streams that have
+strings as data sources and data destinations rather than the usual standard buffers).
+
+6. The >> operator is used for word-oriented input and ignores any kind of whitespace, while the
+getline() member function is used for line-oriented input and reads data until the '\n' delimiter is
+extracted.
+
+7. Base streams: istream, ostream.
+   First gen. derived streams: istream => istringstream, ifstream
+                                       => iostream
+                               ostream => ostringstream, ofstream
+   Second gen. derived streams: iostream => stringstream, fstream.
+
+8. The key of a map is a POD/UD type that's internally used by the map's implementation (usually
+balanced binary search trees, or more specifically, red-black trees).
+
+9. We iterate over the elements of a map just like with any other STL container: by using a pair of
+iterators; except that the elements are pairs (another useful STL type).
+
+10. Every key in a map is unique, while a multimap allows for multiple equivalent keys.
+    The subscript operator (i.e. operator[]) is missing from the multimap container, because the data
+structure has no way of knowing which specific element do we wish to access from the pool of elements
+with the same key.
+
+11. A forward iterator only requires the following operations: ++, ==, != and *.
+
+12. The difference between an empty field and a nonexistent field is the following:
+        1. An empty field is an abstract entity that exists (and so it has a STATE),
+        BUT which has empty contents (i.e. is in a void state).
+        2. A nonexistent field is NOT an entity, because it does not exist (and so it has NO state),
+        AND the field itself (and implicitly its contents) is UNDEFINED.
+
+13. ???
+
+14. We get a pattern into a regex variable by initializing (or assigning) it a string that holds the
+regular expression.
+
+15. "\w+\s\d{4}" matches one or more letters, digits or underscores, followed by a space, followed by
+another 4 digits. We would use a raw string literal to initialize a regex variable with such a pattern.
+
+16. We find out if a string is a valid regex by trying to catch a bad_expression exception.
+
+17. regex_search() looks for its pattern as a substring in a stream.
+
+18. regex_match() looks for a complete match of its pattern and the string.
+
+19. We represent a character dot in a regex by backslashing it, i.e. using '\.'
+
+20. We represent the notion of "at least three" in a regex by using '{3,}'.
+
+21. Yes, '7' and '_' are both '\w' characters.
+
+22. The notation for an uppercase character is '\u' or '[[:upper:]]'.
+
+23. ???
+
+24. By using the sub-matches of the smatch vector (i.e. the sub-patterns defined in the pattern).
+
+25. We represent a floating-point number as a regex in the following way: '\d*\.\d+'
+
+26. By using a stringstream to convert the string that holds the characters of a floating-point value
+to a floating point arithmetic number.
+
+27. A sub-match is an element of type string in the smatch vector. A sub-match is a sub-pattern defined
+in the regex, where a sub-pattern can be defined as "anything in parantheses in the pattern".
+We access a sub-match through the subscript operator. The first element is the complete match.

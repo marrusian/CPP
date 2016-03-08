@@ -1,0 +1,159 @@
+- A template is a mechanism that allows a programmer to use types as parameters for a class
+or a function. The compiler then generates a specific class or function when we later
+provide specific types as arguments.
+
+- Sometimes we call a "class template" a "type generator". The process of generating types from
+a class template given template arguments is called "specialization" or "template instantiation".
+Template instantiation takes place at compile time or link time.
+
+- Templates are the basis for generic programming in C++.
+
+- Generic programming: Writing code that works for a variety of types presented as arguments, as
+long as those argument types meet specific syntactic and semantic requirements.
+
+- When we parameterize a class, we get a "class template", what is often called a "parameterized
+type" or a "parameterized class".
+  When we parameterize a function, we get a "function template", what is often called a
+"parameterized function" and sometimes called an "algorithm".
+
+- Because of this, generic programming is sometimes reffered to as "algorithm-oriented programming";
+the focus of the design is more the algorithms than the data types they use.
+
+- Generic programming relying on explicit template parameters is often called "parametric
+polymorphism". In contrast, the polymorphism we get from using class hierarchies and virtual
+functions is called "ad-hoc polymorphism" and that style of programming is called OOP.
+
+- For unsurpassed flexibility and performance:
+	1. Use templates where performance is essential (e.g. numerics and hard real time).
+	2. Use templates where flexibility in combining information from several types is essential
+	(e.g. the C++ STL).
+
+- Compilers tend to require that a template must be fully defined wherever it is used. Because of
+this, we should place the definition of any template that is used in more than one translation
+unit in a header file.
+
+- The C++14 standard provides a mechanism for vastly improved checking of template interfaces.
+
+- A set of requirements on a template argument is called a "concept". A template argument must
+meet the requirements(the concepts) of the template to which it is applied.
+A concept is a type predicate, that is, a compile-time-evaluated function that returns "true"
+if the type argument has the properties required by the concept, and false otherwise.
+
+For example: a vector requires that its elements can be copied or moved, can have their address
+taken, and be default constructed.
+
+- We can parameterize classes with "other things", such as integer values and string values. The
+most useful kinds are type and integer parameters.
+
+- For class templates, we specify the template arguments when we create an object of some
+specific class.
+  For function templates, the compiler usually deduces the template arguments from the
+function arguments.
+
+- One of the fundamental principles of programming is that if we acquire a resource, we must -
+somehow, directly or indirectly - return it to whatever part of the system manages that resource.
+Examples of resources:
+	- Memory
+	- Locks
+	- File handles
+	- Thread handles
+	- Sockets
+	- Windows
+
+- We define a resource as something that is acquired and must be given back (released) or reclaimed
+by some "resource manager." We call an object that is respnsible for releasing a resource the
+"owner" (or a "handle") of the resource for which it is responsible.
+
+- A very common style of error handling is to clean up any local resources and indicate failure
+by throwing an exception whenever a function can't do its job.
+
+- There are three types of guarantees:
+	1. Basic guarantee: Partial execution of failed operations can cause side effects, but all
+	invariants are preserved and no resources are leaked.
+
+	(All code that is part of a program that we expect to recover from an exception throw
+	should provide the basic guarantee. STL provides the basic guarantee.)
+
+	2. Strong guarantee: in addition to providing the basic guarantee, a function also ensures
+	that all obervable values (i.e. all values not local to the function) are the same after
+	failure as they were when the function was called.
+
+	(The strong guarantee is the ideal when we write a function).
+
+	3. No-throw guarantee: Operations are guaranteed to succeed and satisfy all requirements
+	even in presence of exceptional situations. If an exception occurs, it will be handled
+	internally and not observed by clients.
+
+	(All built-in facilities of C++ provide the no-throw guarantee. To avoid throwing,
+	simply avoid throw itself, new, and dynamic_cast of reference types).
+
+- RAII is essential for implementing code written according to those ideals simply and with
+high performance.
+
+- A unique_ptr is an object that holds a pointer, however, it owns the object pointed to.
+It behaves very much like an ordinary pointer, but it has one significant restriction:
+you cannot asign one unique_ptr to another.
+
+##################################################################################################
+
+Review Answers:
+
+1. Because we almost always need non-constant storage space to avoid the overhead of allocating
+sufficient space before-hand, thus making our programs less flexible.
+
+2. Because we need a variety of data types in our programs in order to closely express our
+ideas and needs.
+
+3. Because we can't realistically estimate such size. Sometimes, it's even impossible given the fact
+that we often don't know just how much data we'll be dealing with. Doing this will certainly lead
+to a lot of problems, code-wise and maintenance-wise.
+
+4. We don't allocate any spare space for a new vector. However, if we do any dynamic operations on it,
+we first reserve space for 8 elements if the vector is empty or we double the amount otherwise.
+
+5. Whenever we:
+	a. Construct a new vector from an old one;
+	b. Assign a permanent vector to another;
+	c. Re-allocate space for new elements.
+
+6. Copy assignment, move assignment, push_back and resize.
+
+7. The value of the vector that has been copied.
+
+8. Copy constructor and assignment.
+
+9. The default meaning is memberwise-copy (i.e. shallow copy).
+
+10. A template is a mechanism that allows a programmer to use types as parameters for a class or 
+a function. The compiler then generates a specific class or function later when specific type
+arguments are provided.
+
+11. The two most useful kind of template arguments are type and integer parameters.
+
+12. Generic Programming is paradigm for writing code that works for a variety of types presented
+as arguments, as long as those argument types meet specific syntactic and semantic requirements.
+
+13. Generic programming relies on explicit template parameters and is often called "parametric
+polymorphism", while OOP relies on class hierarchies and virtual functions and is known as
+"ad-hoc polymorphism". Also, the parametric polymorphism takes place at compile-time in contrast
+to ad-hoc polymorphism, which is dynamic.
+
+14. Array is a static sequence container, meaning that its size is fixed at compile-time.
+It takes one additional template parameter, an integer parameter, representing its size.
+
+15. Arrays know their size, they do not convert to pointers and can be properly copied.
+
+16. resize() modifies the actual size of a vector, initializing or destroying elements as needed,
+while reserve() modifies only the allocated space that serves for future expansion.
+
+17. We define a resource as something that is acquired and must be given back/released or reclaimed
+by some "resource manager" after using it.
+
+18. A resource leak is a resource that we can no longer access through usual means and thus is
+permanently lost until that resource is reclaimed by the operating system at the end of the program.
+
+19. RAII is a resource management technique stating that any resource should be acquired by an 
+object's constructor and be released after using it by its matching destructor.
+
+20. unique_ptr is a "smart" pointer, i.e. an object that is holding a pointer but also owns it.
+It's good for implementing the RAII technique, thus avoiding unwanted leaks.

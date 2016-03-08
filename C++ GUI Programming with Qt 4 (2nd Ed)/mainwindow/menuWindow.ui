@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="spreadsheet.qrc">
+    <normaloff>:/Images/icon.png</normaloff>:/Images/icon.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="fileMenu">
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <addaction name="newAction"/>
+    <addaction name="openAction"/>
+    <addaction name="saveAction"/>
+    <addaction name="saveAsAction"/>
+    <addaction name="separator"/>
+    <addaction name="separator"/>
+    <addaction name="closeAction"/>
+    <addaction name="exitAction"/>
+   </widget>
+   <widget class="QMenu" name="editMenu">
+    <property name="title">
+     <string>&amp;Edit</string>
+    </property>
+    <widget class="QMenu" name="selectSubMenu">
+     <property name="title">
+      <string>&amp;Select</string>
+     </property>
+     <addaction name="selectRowAction"/>
+     <addaction name="selectColumnAction"/>
+     <addaction name="selectAllAction"/>
+    </widget>
+    <addaction name="cutAction"/>
+    <addaction name="copyAction"/>
+    <addaction name="pasteAction"/>
+    <addaction name="deleteAction"/>
+    <addaction name="selectSubMenu"/>
+    <addaction name="separator"/>
+    <addaction name="findAction"/>
+    <addaction name="goToCellAction"/>
+   </widget>
+   <widget class="QMenu" name="toolsMenu">
+    <property name="title">
+     <string>&amp;Tools</string>
+    </property>
+    <addaction name="recalculateAction"/>
+    <addaction name="sortAction"/>
+   </widget>
+   <widget class="QMenu" name="optionsMenu">
+    <property name="title">
+     <string>&amp;Options</string>
+    </property>
+    <addaction name="showGridAction"/>
+    <addaction name="autoRecalcAction"/>
+   </widget>
+   <widget class="QMenu" name="helpMenu">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="aboutAction"/>
+    <addaction name="aboutQtAction"/>
+   </widget>
+   <addaction name="fileMenu"/>
+   <addaction name="editMenu"/>
+   <addaction name="toolsMenu"/>
+   <addaction name="optionsMenu"/>
+   <addaction name="helpMenu"/>
+  </widget>
+  <widget class="QToolBar" name="fileToolBar">
+   <property name="windowTitle">
+    <string>&amp;File</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="newAction"/>
+   <addaction name="openAction"/>
+   <addaction name="saveAction"/>
+  </widget>
+  <widget class="QToolBar" name="editToolBar">
+   <property name="windowTitle">
+    <string>&amp;Edit</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="cutAction"/>
+   <addaction name="copyAction"/>
+   <addaction name="pasteAction"/>
+   <addaction name="separator"/>
+   <addaction name="findAction"/>
+   <addaction name="goToCellAction"/>
+  </widget>
+  <action name="newAction">
+   <property name="icon">
+    <iconset resource="spreadsheet.qrc">
+     <normaloff>:/Images/new.png</normaloff>:/Images/new.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;New</string>
+   </property>
+   <property name="toolTip">
+    <string>Create a new spreadsheet file</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="openAction">
+   <property name="icon">
+    <iconset resource="spreadsheet.qrc">
+     <normaloff>:/Images/open.png</normaloff>:/Images/open.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Open...</string>
+   </property>
+   <property name="toolTip">
+    <string>Open an existing spreadsheet file</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="saveAction">
+   <property name="icon">
+    <iconset resource="spreadsheet.qrc">
+     <normaloff>:/Images/save.png</normaloff>:/Images/save.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Save</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="saveAsAction">
+   <property name="text">
+    <string>Save &amp;As...</string>
+   </property>
+   <property name="toolTip">
+    <string>Save As</string>
+   </property>
+  </action>
+  <action name="exitAction">
+   <property name="text">
+    <string>&amp;Exit</string>
+   </property>
+   <property name="toolTip">
+    <string>Exit the application</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="cutAction">
+   <property name="icon">
+    <iconset resource="spreadsheet.qrc">
+     <normaloff>:/Images/cut.png</normaloff>:/Images/cut.png</iconset>
+   </property>
+   <property name="text">
+    <string>Cu&amp;t</string>
+   </property>
+   <property name="toolTip">
+    <string>Cut contents</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+X</string>
+   </property>
+  </action>
+  <action name="copyAction">
+   <property name="icon">
+    <iconset resource="spreadsheet.qrc">
+     <normaloff>:/Images/copy.png</normaloff>:/Images/copy.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Copy</string>
+   </property>
+   <property name="toolTip">
+    <string>Copy contents</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
+  </action>
+  <action name="pasteAction">
+   <property name="icon">
+    <iconset resource="spreadsheet.qrc">
+     <normaloff>:/Images/paste.png</normaloff>:/Images/paste.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Paste</string>
+   </property>
+   <property name="toolTip">
+    <string>Paste contents</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
+   </property>
+  </action>
+  <action name="deleteAction">
+   <property name="text">
+    <string>&amp;Delete</string>
+   </property>
+   <property name="toolTip">
+    <string>Delete contents</string>
+   </property>
+   <property name="shortcut">
+    <string>Del</string>
+   </property>
+  </action>
+  <action name="selectRowAction">
+   <property name="text">
+    <string>&amp;Row</string>
+   </property>
+   <property name="toolTip">
+    <string>Select current row</string>
+   </property>
+  </action>
+  <action name="selectColumnAction">
+   <property name="text">
+    <string>&amp;Column</string>
+   </property>
+   <property name="toolTip">
+    <string>Select current column</string>
+   </property>
+  </action>
+  <action name="selectAllAction">
+   <property name="text">
+    <string>&amp;All</string>
+   </property>
+   <property name="toolTip">
+    <string>Select all the cells in the spreadsheet</string>
+   </property>
+  </action>
+  <action name="findAction">
+   <property name="icon">
+    <iconset resource="spreadsheet.qrc">
+     <normaloff>:/Images/find.png</normaloff>:/Images/find.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Find...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
+   </property>
+  </action>
+  <action name="goToCellAction">
+   <property name="icon">
+    <iconset resource="spreadsheet.qrc">
+     <normaloff>:/Images/gotocell.png</normaloff>:/Images/gotocell.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Go to Cell...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+G</string>
+   </property>
+  </action>
+  <action name="recalculateAction">
+   <property name="text">
+    <string>&amp;Recalculate</string>
+   </property>
+   <property name="toolTip">
+    <string>Recalculate cells</string>
+   </property>
+   <property name="shortcut">
+    <string>F9</string>
+   </property>
+  </action>
+  <action name="sortAction">
+   <property name="text">
+    <string>&amp;Sort</string>
+   </property>
+   <property name="toolTip">
+    <string>Sort the cells in the current spreadsheet</string>
+   </property>
+  </action>
+  <action name="showGridAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Show Grid</string>
+   </property>
+   <property name="toolTip">
+    <string>Show or hide the spreadsheet's grid</string>
+   </property>
+  </action>
+  <action name="autoRecalcAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Auto-Recalculate</string>
+   </property>
+   <property name="toolTip">
+    <string>Set automatic recalculation of cells</string>
+   </property>
+  </action>
+  <action name="aboutAction">
+   <property name="text">
+    <string>&amp;About</string>
+   </property>
+   <property name="toolTip">
+    <string>Find out more about this application</string>
+   </property>
+  </action>
+  <action name="aboutQtAction">
+   <property name="text">
+    <string>About &amp;Qt</string>
+   </property>
+   <property name="toolTip">
+    <string>Show the Qt library's About box</string>
+   </property>
+  </action>
+  <action name="closeAction">
+   <property name="text">
+    <string>&amp;Close</string>
+   </property>
+   <property name="toolTip">
+    <string>Close this window</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+W</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="spreadsheet.qrc"/>
+ </resources>
+ <connections/>
+</ui>

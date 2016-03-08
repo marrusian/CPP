@@ -1,0 +1,53 @@
+The constructor-destructor pair concept:
+- Whatever resources a class object needs to function, it acquires in a constructor;
+- During the object's lifetime, it may release resources and acquire new ones;
+- At the end of the object's lifetime, the destructor releases all resources
+still owned by the object.
+
+- Rule of thumb: classes with virtual functions NEED virtual destructors. Reasons:
+   1. If a class has a virtual function, it's likely to be used as a base class;
+   2. If it's a base class, its derived class is likely to be allocated using new;
+   3. If a derived class object is allocated using new and manipulated through
+a pointer to its base, it's likely to be deleted through a pointer to its base.
+
+- The type "void*" means "pointer to some memory that the compiler doesn't know the 
+type of." We use void* when we want to transmit raw addresses.
+
+- There are 4 types of casts:
+	a. Dynamic Cast;
+	b. Static Cast;
+	c. Reinterpret Cast;
+	d. Const Cast;
+
+- Static cast is used for "reasonably well-behaved conversions" (such as between
+related types). An operation such as static_cast is called an "explicit type
+conversion" or colloquially a "cast".
+
+- Reinterpret cast is used for reinterpreting a bit pattern (i.e. casts between
+unrelated types), and because of this, it's almost guaranteed to be non-portable.
+A typical example is an int-to-pointer conversion to get a machine address
+into a program.
+
+- Const_cast can "cast away const."
+
+- Pointers and references differ in these ways:
+   - Assignment to a pointer changes the pointer's value(not the pointed-to value).
+   - To get a pointer you generally need to use new or &.
+   - To access an object pointed to by a pointer you use * or [].
+   - Beware of null pointers.
+
+   - Assignment to a reference changes the value of the object referred to.
+   - You cannot make a reference refer to a different object after initialization.
+   - Assignment of references does deep copy (i.e assigns to the referred-to object),
+but assignment of pointers does shallow copy (assigns to the pointer object itself).
+
+- Lists are among the most common and useful data structures. A list is made out of
+"links" where each link holds some data and pointers to other links.
+
+- Useful set of operations for a list:
+   - The constructor;
+   - insert: insert before an element;
+   - add: insert after an element;
+   - erase: remove an element;
+   - find: find a Link with a given value;
+   - advance: get the n-th succesor.

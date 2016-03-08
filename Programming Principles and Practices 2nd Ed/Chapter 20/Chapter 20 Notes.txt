@@ -1,0 +1,173 @@
+- We don't control the way in which our "data suppliers" store the data they give us. It's our job to
+ either work with the data in the form in which we get it or read it and store it the way we like.
+
+- Generalization can lead to functions that are useful for more problems.
+
+- There are two major aspects of computing: the computation and the data. Furthermore, the
+"computation part" of our program has to elegantly interact with the "data part."
+
+- The problems for us as programmers are:
+	a. There's an infinite variation of data types.
+	b. There's a bewildering number of ways to store collections of data elements.
+	c. There's a huge variety of tasks we'd like to do with collections of data.
+  To minimize the effect of these problems, we'd like our code to take advantage of commonalities
+among types, among the ways of storing data, and among our processing tasks.
+
+- We'd like to organize our code so that we have to write new code only when we want to do something
+really new and different.
+
+- We want to build on these observations to write code that's:
+	a. Easy to read and modify.
+	b. Regular
+	c. Short
+	d. Fast
+
+- To minimize our programming work, we'd like:
+	a. Uniform access to data (i.e independently of how it's stored and of its type).
+	b. Type-safe access to data.
+	c. Easy traversal of data.
+	d. Compact storage of data.
+	e. Fast retrieval, addition, deletion of data.
+	f. Standard versions of the most common algorithms (copy, find, search, sort etc.)
+
+- The STL was designed to provide a framework for general, correct, and efficient algorithms operating
+on data structures. The ideal was the simplicity, generality, and elegance of mathematics.
+
+- The central concept of the STL is the SEQUENCE. From the STL POV, a collection of data is a sequence.
+We identify the beginning and the end of a sequence by a pair of iterators.
+
+- An iterator is an object that identifies an element of a sequence.
+  Iterators are used to connect our code(algorithms) to our data, without the need to know about the
+implementation details (i.e. without the bewildering variety of ways of storing and accessing data.)
+
+- "Magic constants" are bad for code maintenance. They can also limit the utility of a function and
+often are a sign of sloppy thinking.
+
+- The STL notion of a sequence doesn't require the elements to be stored in consecutive memory. Thus,
+the data structure most directly suggested by the STL sequence is a linked list.
+
+- Operations we need for a list:
+	a. The operations we have for vector (except subscripting).
+	b. Insert && erase.
+	c. An iterator (for traversal and data access).
+   In STL, the iterator type is a member of its class (i.e. ADT<T>::iterator)
+
+- The range-for-loop is defined in terms of the begin() and end() iterator functions.
+
+- Returning the end of the sequence to indicate "not found" is an important STL convention.
+
+- Interchangeability of interfaces is fundamentally good because it allows us to choose based on
+performance, however, we should look at the logical properties of the types underlying those interfaces
+before we consider performance.
+
+- As a programmer, you must acquire the habit of seeking out new information about language facilities,
+libraries and techniques. Just being content with what you know and are comfortable with is a recipe
+for being left behind.
+
+- An STL container:
+	a. Is a sequence of elements [begin():end()) (i.e. a half-open range).
+	b. Provides copy operations. Copying can be done with assignment or a copy constructor.
+	c. Names its element type value_type.
+	d. Has iterator types called iterator and const_iterator. Iterators provide *, ++, == and !=
+	with the appropriate semantics. The iterators for LIST also provide -- for movind backward
+	(i.e. a "bidirectional iterator"). The iterators for VECTOR also provide --, [], +, and - and
+	are called "random-access iterators".
+	e. Provides insert() and erase(), front() and back(), push_back() and pop_back(), size() etc.
+	Vector and map also provide operator[].
+	f. Provides relational operators (i.e. ==, !=, <, <=, >, >=). Containers use lexicographical
+	ordering for <, <=, > and >=.
+
+- There are 5 categories of iterators:
+	a. Input iterator (read-only).
+	b. Output iterator (write-only).
+	c. Forward iterator.
+	d. Bidirectional iterator.
+	e. Random-access iterator.
+   We can do pointer arithmetic only with the random-acess iterator category.
+
+##################################################################################################
+
+Review Answers:
+
+4. Store data into containers, retrieve data, modify data, do numeric operations etc.
+
+5. The ideals for the way of storing our data are:
+	a. Uniform access to data.
+	b. Type-safe access to data.
+	c. Easy traversal of data.
+	d. Compact storage of data.
+	e. Fast retrieval, addition and deletion of data. 
+
+6. An STL sequence is a collection of data defined by a pair of iterators pointing to the beginning
+and the end of the sequence.
+
+7. An STL iterator is an object that identifies the element of a sequence. Iterator are used to connect
+algorithms to data, without the need to know about implementation details. They support all the
+operations defined in pointer arithmetic, such as ==, !=, ++, --, +, - and [].
+
+8. We move an iterator to the next element by using the -- operator.
+
+9. We move an iterator to the previous element by using the ++ operator.
+
+10. Moving an iterator past the end of a sequence causes undefined behaviour.
+
+11. The kinds of iterators that can move to previous elements are bidirectional iterators
+and random-access iterators.
+
+12. It's useful to separate data from algorithms because doing so let's us to ignore:
+	1. The infinite variation of data types.
+	2. The bewildering number of ways of storing collections of data elements.
+   thus leading to a high degree of generalization. By achieving this generalization,
+   our algorithms become useful for more problems.
+
+13. The STL is an acronym standing for "Standard Template Library". It's a framework designed to
+provide general, correct, and efficient algorithms on data structures, and it's part of the standard
+library.
+
+14. A linked list is an ADT(a sequence container) composed of links. It differs from vector in that
+it's designed for optimal insert and erase operations.
+
+15. A link is made out of one or two pointers and a data type for holding the actual data.
+If the list is a singly-linked list, the link has a pointer that points to the next link in the list.
+If the list is a doubly-linked list, the link has two pointers that point to the previous and next
+links in the list.
+
+16. For ADTs that use contigous memory to store data, the insert() and erase() operations are merely
+copying elements, thus invalidating a certain number of iterators.
+For ADTs that use non-contigous memory to store data, those operations are allocating&&constructing
+or deallocating&&destroying elements after which "local links" are reforged, thus keeping the validity
+of all iterators.
+
+17. A sequence is empty when the iterator pointing to the beginning of the sequence is equal to the
+iterator pointing to the end of it.
+
+18. The iterator for a list provides the usual iterator operations, plus the unary -- operator for
+moving backwards.
+
+19. You iterate over a STL container by either explicitly using iterators or using a range-for loop.
+
+20. We choose a string over a vector whenever we need string-specific operations like concatenation
+or reading whitespace separated words.
+
+21. We choose a list over a vector whenever we need the optimal performance of the insert() and erase()
+operations of the list and want to keep iterators valid.
+
+22. A container is a sequence of elements defined by a pair of iterators, which provides copy
+operations.
+
+23. Begin() should return an iterator pointing to the first element in a sequence, and end() should
+return an iterator pointing to one past-the-end of the sequence.
+
+24. The STL provides sequence containers, associative containers and adaptors.
+Examples of sequence containers: array, vector, list, forward_list and deque.
+Examples of associative containers: set, map, multiset, multimap and their unordered versions.
+Examples of adaptors: stack, queue, priority_queue.
+
+25. The STL offers five kinds of iterators:
+	a. Input and output iterators.
+	b. Forward iterators.
+	c. Bidirectional iterators.
+	d. Random-access iterators.
+
+26. Operations provided by a R-A iterator that are not defined for a bidirectional iterator are:
++, - and [].

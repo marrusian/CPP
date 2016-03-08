@@ -1,0 +1,69 @@
+<order>
+<oname>Andrew</oname>
+<oaddr>North Dakota, P543</oaddr>
+<oproduct> 
+	<pname>TV</pname>
+	<pprice>255.5</pprice>
+	<pquantity>10</pquantity>
+
+	<pname>Microwave</pname>
+	<pprice>65.33</pprice>
+	<pquantity>5</pquantity>
+</oproduct>
+</order>
+
+<order>
+<oname>W. Edwards</oname>
+<oaddr>Washington DC</oaddr>
+<oproduct> 
+	<pname>Canon EOS Rebel T3i Digital SLR</pname>
+	<pprice>589.00</pprice>
+	<pquantity>2</pquantity>
+
+	<pname>Canon EOS 6D 20.2 MP CMOS Digital SLR</pname>
+	<pprice>1899.00</pprice>
+	<pquantity>5</pquantity>
+</oproduct>
+</order>
+
+<order>
+<oname>Kevin Danjou</oname>
+<oaddr>Canada</oaddr>
+<oproduct> 
+	<pname>Apple iPod classic 160 GB Black (7th Generation)</pname>
+	<pprice>370.99</pprice>
+	<pquantity>1</pquantity>
+
+	<pname>Apple iPod touch 16GB Black/Silver (5th Generation)</pname>
+	<pprice>197.99</pprice>
+	<pquantity>4</pquantity>
+</oproduct>
+</order>
+
+<order>
+<oname>Kenneth Cooper</oname>
+<oaddr>Oklahoma</oaddr>
+<oproduct> 
+	<pname>Samsung PN64H5000 64-Inch 1080p 600Hz Plasma HDTV</pname>
+	<pprice>1297.99</pprice>
+	<pquantity>2</pquantity>
+
+	<pname>Panasonic TC-P58VT25 58 3D 1080p VIERA Plasma HDTV</pname>
+	<pprice>1999.00</pprice>
+	<pquantity>5</pquantity>
+</oproduct>
+</order>
+
+<order>
+<oname>Charles Lyman</oname>
+<oaddr>Kentucky</oaddr>
+<oproduct> 
+	<pname>SGibson J-200 Standard Acoustic-Electric Guitar, Antique Natural</pname>
+	<pprice>3799.00</pprice>
+	<pquantity>1</pquantity>
+
+	<pname>Peavey Delta Blues 115 guitar Amplifier with Tremolo</pname>
+	<pprice>634.92</pprice>
+	<pquantity>3</pquantity>
+</oproduct>
+</order>

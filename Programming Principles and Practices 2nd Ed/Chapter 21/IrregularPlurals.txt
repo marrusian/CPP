@@ -1,0 +1,124 @@
+addendum 	addenda
+aircraft 	aircraft
+alumna 		alumnae
+alumnus 	alumni
+analysis 	analyses
+antenna 	antennae
+antithesis 	antitheses
+apex 		apices
+appendix 	appendices
+axis 		axes
+	
+bacillus 	bacilli
+bacterium 	bacteria
+basis 		bases
+beau 		beaux
+bison 		bison
+bureau 		bureaux
+	
+cactus 		cacti
+château 	châteaux
+child 		children
+codex 		codices
+concerto 	concerti
+corpus 		corpora
+crisis 		crises
+criterion 	criteria
+curriculum 	curricula
+	
+deer 		deer
+diagnosis 	diagnoses
+die 		dice
+dwarf 		dwarves
+	
+ellipsis 	ellipses
+erratum 	errata
+	
+fez 		fezzes
+fish 		fish
+focus 		foci
+foot 		feet
+formula 	formulae
+fungus 		fungi
+	
+genus 		genera
+goose 		geese
+graffito 	graffiti
+grouse 		grouse
+	
+half 		halves
+hoof 		hooves
+hypothesis 	hypotheses
+	
+index 		indices
+	
+larva 		larvae
+libretto 	libretti
+loaf 		loaves
+locus 		loci
+louse 		lice
+	
+man 		men
+matrix 		matrices
+memorandum 	memoranda
+minutia 	minutiae
+moose 		moose
+mouse 		mice
+	
+nebula 		nebulae
+nucleus 	nuclei
+	
+oasis 		oases
+offspring 	offspring
+opus 		opera
+ovum 		ova
+ox 		oxen
+	
+paralysis	paralyses
+paranthesis	parantheses
+parenthesis 	parentheses
+person		people
+phenomenon 	phenomena
+phylum 		phyla
+prognosis 	prognoses
+	
+quiz 		quizzes
+	
+radius 		radii
+referendum 	referenda
+	
+salmon 		salmon
+scarf 		scarves
+self 		selves
+series 		series
+sheep 		sheep
+shrimp 		shrimp
+species 	species
+stimulus 	stimuli
+stratum 	strata
+swine 		swine
+syllabus 	syllabi
+symposium 	symposia
+synopsis 	synopses
+synthesis	syntheses
+	
+tableau 	tableaux
+terminus	termini
+that		those
+this		these
+thesis 		theses
+thief 		thieves
+tooth 		teeth
+torus		tori
+trout 		trout
+tuna 		tuna
+	
+vertebra 	vertebrae
+vertex 		vertices
+vita 		vitae
+vortex 		vortices
+	
+wharf 		wharves
+wife 		wives
+wolf 		wolves
+woman 		women

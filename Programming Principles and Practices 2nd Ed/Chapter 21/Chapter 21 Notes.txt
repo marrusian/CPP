@@ -1,0 +1,193 @@
+- The stdlib offers about 80 algorithms. By default, comparison for equality is done using "==" and
+ordering is done based on "<".
+
+- Don Knuth once said: "I have only proven the algorithm correct, not tested it." Even mathematical
+proofs can contain errors. To be confident, we need to both reason and test.
+
+#############################################################################################
+- The STL algorithm that searches based on a user-supplied criterion is find_if(Iter, Iter, Pred).
+- A predicate is a function that returns true or false.
+
+- We can define implicit arguments by instantiating a "function object" (also called a "functor"),
+i.e. an object that can behave like a function.
+  We need an object because objects can store data.
+
+- Function objects are created by overloading the "() operator", which is called "the function call
+operator" or "the application operator".
+
+- The use of function objects is the main method of parameterization in the STL. We use them to specify
+search criteria, to define sorting criteria, to specify arithmetic operations in numerical algorithms,
+to define equality criteria etc.
+
+- Function objects are usually very efficient. In particular, passing a small function object by value
+to a template function typically leads to optimal performance (this is true iff the object is small
+or passed by reference and if the function call operator is small and inlined).
+
+- We tend to prefer function objects over named functions if:
+	a. They need to store a value between calls.
+	b. They are so short that inlining can make a difference.
+
+- We can also use predicates on class members. A function object can be used to hide ugly and 
+error-prone code (like low-level C-style code).
+
+#############################################################################################
+Lambda expressions:
+
+- To avoid defining a function just to pass it once as an argument, C++ offers a notation for defining
+something that acts as a function in the argument position where it is needed, which is:
+	[](parameter list) { function body }
+
+- This kind of expression is called "lambda expression", i.e an unnamed function defined right on spot.
+
+- The "[]" is called a "lambda introducer". The lambda introducer can be used to give the lambda
+expression access to local variables.
+
+- The return type can be deduced from the lambda body.
+  If we want to specify the return type explicitly, we use a trailing return type:
+	[](parameter list) -> T { function body }
+
+- Lambda expressions should be kept simple to avoid becoming a source of errors and confusion.
+  It's recommended to use named functions for anything that doesn't easily fit on a line or two.
+
+##############################################################################################
+- There are just four STL-style standard library numerical algorithms that are found in <numeric>:
+accumulate(), inner_product(), partial_sum(), adjacent_difference().
+
+- The variable in which a numerical algorithm stores its computation is often referred to as the
+"accumulator". The type of the result is the type of the variable that a numerical algorithm uses
+to hold the accumulator, thus giving us a high degree of flexibility.
+
+- For numerical algorithms, we can specify the operation(s) to be used (i.e. any binary operation
+that accepts two arguments of the accumulator's type). All basic binary operations are defined in
+<functional>.
+
+#############################################################################################
+- Map is probably the most useful STL container after vector. A map is an ordered sequence of
+(key,value) pairs in which you can look up a value based on a key.
+  An unordered_map is a map optimized for keys that are strings.
+
+- The STL provides eight associative containers: map, set, multimap, multiset and their unordered
+equivalents.
+
+- The STL map implementations are red-black trees(a specific type of BBST).
+
+- We use a map when we want to:
+	a. Make the association between the different values explicit.
+	b. Keep elements in the order defined by its key.
+	c. Look up values based on the key.
+
+- For integers and character strings, we can do even better than a map's tree search. The idea is that
+given a key, we compute an index into a vector. That index is called a "hash value" and a container
+that uses this technique is typically called a "hash table".
+  The number of possible keys is far larger than the number of slots in the hash table.
+
+- The main virtue of a hash table is that on average, the cost of a lookup is (near) constant and
+independent of the number of elements in the table. That's a significant advantage for large maps.
+
+- The STL unordered_map is implemented using a hash table.
+
+- The rule of thumb is:
+	1. Use VECTOR unless you have a good reason not to.
+	2. Use MAP if you need to look up based on a value (and if the key type has a reasonable
+	and efficient predicate).
+	3. Use UNORDERED_MAP if you need to do a lot of lookup in a large map and you don't need
+	an ordedered traversal (and if the key type has a good hash function).
+
+- A SET is a map without values. Sets are useful for keeping track of different objects (like which
+fruits are available in a store - independently of price -, or building a dictionary).
+
+- Because set doesn't have a value tpye, it doesn't support subscripting.
+
+#############################################################################################
+- The STL provides three versions of copy: copy() unique_copy(), copy_if().
+
+- Given a pair of iterators, the copy() operations copy a sequence into another sequence specified by
+an iterator to its first element.
+  The type of the input sequence can be different from the type of the output sequence. That's a useful
+generality of STL algorithms.
+
+- Stream iterators act like forward iterators to istream and ostream buffers.
+  Dereferencing: a. An istream iterator reads the elements from the associated istream buffer.
+		 b. An ostream iterator writes the elements to the associated ostream buffer.
+
+- The a. copy() algorithm copies unconditionally.
+      b. unique_copy() algorithm suppresses adjacent elements with the same value.
+      c. copy_if() algorithm copies only elements for which a predicate is true.
+
+#############################################################################################
+- We define STL algorithms in terms of sequences of elements specified by iterators.
+ 
+- An input sequence is defined as a pair of iterators [b:e) where b points to the first element in the
+sequence and e to the one-past-the-end element of the sequence.
+
+- An output sequence is specified as an iterator to its first element (thus it's implied that the
+output sequence is at least big enough to hold the input sequence).
+
+----------------------------------------------------------------------------------------------
+
+Review answers:
+
+1. Examples of useful STL algorithms are: find(), find_if(), count(), count_if(), copy(), unique_copy()
+copy_if(), accumulate(), inner_product(), sort(), stable_sort(), equal() etc.
+
+2. find(Iter1, Iter2, Value) returns an iterator to the first occurence of "Value" in the sequence
+defined by the pair of iterators. If Value was not found, it returns an iterator to the last element,
+i.e. Iter2 itself.
+
+3. count_if(Iter1, Iter2, Pred) returns the number of elements in [Iter1, Iter2) so that Pred(x) is
+true.
+
+4. sort(b,e) uses the "<" operator as its sorting criterion (defined in <functional> as less<T>()).
+By default, all ordering is done based on "<".
+
+5. An STL algorithm takes a container as an input argument by specifying a pair of iterators that point
+to the beginning, respectively the end, of the sequence.
+
+6. An STL algorithm takes a container as an output argument by specifing an iterator to its first
+elements. It's implied that the output container is large enough.
+
+7. All STL algorithms indicate "failure" by returning an iterator to the last element in the specified
+sequence.
+
+8. A function object is an object that acts like a function by overloading the function call operator
+(i.e. "operator()").
+
+9. Function objects differ from named functions in that they can store value(s) between calls and
+can have implicit arguments.
+
+10. A predicate is a function that returns true or false.
+
+11. accumulate(b,e,i) sums all the elements in the [b,e) sequence, using i as an accumulator(i.e.
+the variable in which the algorithm stores its computation).
+
+12. inner_product(b,e,b2,i) is the inner product of [b,e) and [b2:b2+(e-b)).
+
+13. An associative container is a sequence in which you can look up a value based on a key. Examples
+of A.Cs: set, map, multiset, multimap and their unordered equivalents.
+
+14. List is a sequence container, because it can be seen as a non-contigous sequence of elements.
+
+15. The basic ordering property of a binary tree is that for each and every node, its left child
+is smaller than itself, while its right child is larger (i.e. node->left < node && node < node->right)
+
+16. A tree is balanced when for each and every node, the height of its left sub-tree is approximately
+equal (±1) to the height of its right sub-tree.
+
+17. The storage space of a map element is equal to: sizeof(key) + sizeof(value) + 2*sizeof(void*).
+
+18. The storage space of a vector element is equal to the size of the element.
+
+19. We use an unordered_map whenever we need to do a lot of lookups in a large map and we don't need
+ordered traversal (a search in an unordered_map is faster than in a map, given that the key type
+has a good hash function).
+
+20. A set is a map without values.
+
+21. A multimap allows for duplicate keys, while in a map, all keys are unique.
+
+22. We could use a copy() algorithm instead of a simple loop because it takes less typing, it's less
+error-prone, it's easy and effective (minus the cost for the call, which becomes insignificant for a 
+vector with a few bunch of elements).
+
+23. A binary search is a very efficient search technique used for sorted collections of data (its
+Big-O complexity is log[2,N], where N is the number of elements).

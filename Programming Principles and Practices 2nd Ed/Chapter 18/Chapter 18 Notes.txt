@@ -1,0 +1,90 @@
+- Regarding copying, the basic issue is whether you copy a pointer(or reference) or copy the 
+information pointed to (referred to):
+	a. Shallow copy - copies only a pointer so that the two pointers now refer to the same
+			object. That's what pointers and references do (memberwise copy).
+	b. Deep copy 	- copies what a pointer points to so that the two pointers now refer to
+		      	distinct objects. We define copy constructors and copy assignments 
+		      	when we want a deep copy for objects of our classes.
+
+- Types that provide shallow copy are said to have pointer/reference semantics (they copy addresses).
+- Types that provide deep copy (like string, vector etc.) are said to have value semantics (they
+copy the values pointed to).
+
+##################################################################################
+- There are seven essential operations to consider when defining a class:
+	- Constructors from one or more arguments;
+	- Default constructor;
+	- Copy constructor
+	- Copy assignment
+	- Move constructor
+	- Move assignment
+	- Destructor
+
+- A default constructor:
+	a. Is needed if we want to be able to make objects of the class without
+	specifying an initializer.
+	b. Makes sense when we can establish the invariant for the class with
+	a meaningful and obvious default value (such as 0 for int/double, "" for strings etc.)
+
+- A class needs a destructor if it acquires resources, i.e something it "gets from somewhere"
+and has to give it back once it has finished using it.
+Some examples of resources are:
+	a. Memory from the free-store.
+	b. Files;
+	c. Locks;
+	d. Thread handles;
+	e. Sockets;
+
+- A class that needs a destructor almost always also needs a copy constructor and a copy assignment,
+because if an object has acquired a resource, the default meaning of copy (memberwise, shallow copy)
+is almost certainly wrong.
+
+- A class that needs a destructor almost always also needs a move constructor and a move assignment,
+because the usual copy operations can be expensive.
+
+##################################################################################
+- A constructor that takes a single argument defines an implicit conversion from its argument type
+to its class.
+
+- To supress this use of a constructor as an implicit conversion, we define an EXPLICIT constructor
+to provides only the usual construction semantics and not the implicit conversions.
+
+---------------------------------------------------------------------------------------
+
+Review Answers:
+
+1. "Caveat emptor" means "let the buyer beware".
+2. The default meaning of copying for class objects is memberwise copy(shallow).
+3. The default meaning of copying of class objects is appropriate whenever we don't acquire
+external resources that we have to give back after using them (memory from heap, files,
+locks, thread handles, sockets etc.)
+4. A copy constructor is a special member function that acts like a constructor, but it's
+defined to take as its argument a reference to the object from which to copy.
+5. A copy assignment is an assignment between UDTs. It can be shallow or deep.
+6. A copy initialization constructs a distinct object with the data of another, but
+a copy assignment just copies the data from one object to another (no construction involved).
+That is, we often have to deal with old data.
+7. A shallow copy copies only a pointer, so after a copy construction/assignment, the two
+pointers refer to the same object.
+A deep copy copies what a pointer is pointing to, so after a copy, the two pointers refer 
+to distinct objects.
+9. The essential operations for a class are:
+	a. Constructor (and default constructor);
+	b. Copy constructor;
+	c. Copy assignment;
+	d. Move constructor;
+	e. Move assignment;
+	f. Destructor.
+10. An explicit constructor is a constructor that is supressing the implicit conversion from
+a type to its class when only one argument is involved, thus providing only the usual 
+construction semantics.
+11. Constructors and destructors (including copy and move constructors).
+12. An array is an homogeneous sequence of objects allocated in contiguous memory.
+13. By providing functions that copy an array element by element.
+14. By specifying a set of initial values, letting the compiler counting the elements, 
+or specifying a fixed size and initializing the array to a default value.
+15. Whenever we have to deal with memory from the free-store or other resources that we can't
+otherwise access.
+16. A C-style string is a null-terminated array of chars.
+17. A word that is spelt the same both ways.
+

@@ -1,0 +1,13 @@
+<RCC>
+  <qresource>
+    <file>Images/new.png</file>
+    <file>Images/open.png</file>
+    <file>Images/save.png</file>
+    <file>Images/copy.png</file>
+    <file>Images/cut.png</file>
+    <file>Images/paste.png</file>
+    <file>Images/find.png</file>
+    <file>Images/gotocell.png</file>
+    <file>Images/icon.png</file>
+  </qresource>
+</RCC>
